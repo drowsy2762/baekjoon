@@ -9,12 +9,8 @@ while(1) :
             if n % i == 0:
                 a.append(i)
     if(n == sum(a)) :
-        print(n,end=' =')
-        for i in range(len(a)) :
-            if(i == len(a)-1) :
-                print('',a[i])
-                break
-            print('',a[i],end=' +')
+        print(n,end=' = ')
+        print(*a,sep=" + ")
     else :
         print(n,'is NOT perfect.')
     
