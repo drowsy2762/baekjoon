@@ -1,7 +1,14 @@
-n1, n2 = map(int(),input().split())
-
-
-
-
-
-# 생각해보자 a, b의 최소공배수는 a % i == 0 이면서 b % i == 0 / 24 = 2*2*2*3 / 18 = 3*3*2
+a, b = map(int,input().split())
+if ( b > a ) :
+    temp = a
+    a = b
+    b = temp
+t = a*b
+while(1) :
+    if ( a % b == 0) :
+        break;
+    n = a % b
+    a = b
+    b = n
+print(b)
+print(int(t/b))
