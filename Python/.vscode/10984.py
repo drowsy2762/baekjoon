@@ -1,37 +1,11 @@
-n = int(input())
-for _ in range(n) :
-    C = 0
-    G = 0.0
-    t = int(input())
-    for _ in range(t) :
-        a, b = input().split()
-        C += int(a)
-        G += float(b)
-    print(C,end=" ")
-    if (G / float(t)) < 0.7 :
-        print("0.0")
-    elif (G / float(t)) < 1 :
-        print("0.7")
-    elif (G / float(t)) < 1.3 :
-        print("1.0")
-    elif (G / float(t)) < 1.7 :
-        print("1.3")
-    elif (G / float(t)) < 2 :
-        print("1.7")
-    elif (G / float(t)) < 2.3 :
-        print("2.0")
-    elif (G / float(t)) < 2.7 :
-        print("2.3")
-    elif (G / float(t)) < 3 :
-        print("2.7")
-    elif (G / float(t)) < 3.3 :
-        print("3.0")
-    elif (G / float(t)) < 3.7 :
-        print("3.3")
-    elif (G / float(t)) < 4 :
-        print("3.7")
-    elif (G / float(t)) < 4.3 :
-        print("4.0")
-    else :
-        print("4.3")
-    
+T = int(input())
+for t in range(T):
+    N = int(input())
+    get_sum = 0.0
+    C_sum = 0
+    for n in range(N):
+        C, G = map(float, input().split())
+        get_sum += C * G
+        C_sum += C
+    GPA = get_sum / C_sum
+    print("%s %.1f" % (int(C_sum), GPA))
