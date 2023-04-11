@@ -6,8 +6,8 @@ for i in range(8):
     b.append(n)
 a.sort()
 sum = 0
-for i in range(5):
-    sum += a[7-i]
+for i in range(7,3):
+    sum += a[i]
 print(sum)
 for i in range(8):
     if(b[i]>=a[3]):
