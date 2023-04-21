@@ -13,6 +13,3 @@ for i in range(n):
     if red == hole:
         break
 print(board)
-
-# red - > hole blue !-> hole
-#
