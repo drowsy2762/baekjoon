@@ -1,4 +1,4 @@
-# 그대로 출력하기 : python3
+# 그대로 출력하기 2 : python3
 
 while True:
     try:
