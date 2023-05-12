@@ -8,4 +8,9 @@ import sys
 #     else:
 #         s = ord(word[i]) + 23
 #     print(chr(s), end="")
-print(10000 / 10)
+# print(10000 / 10)
+sum = 0
+for i in range(65, 91):
+    sum += i
+    print(sum)
+print(sum, "t")
