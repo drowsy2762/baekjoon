@@ -5,26 +5,25 @@
 # 0 0 1 1 2 2 3 3 4 4
 
 import sys
+import heapq
 
 
-def quick_sort(arr):
-    if len(arr) <= 1:
-        return arr
-    pivot = arr[len(arr) // 2]
-    lesser_arr, equal_arr, greater_arr = [], [], []
-    for num in arr:
-        if num < pivot:
-            lesser_arr.append(num)
-        elif num > pivot:
-            greater_arr.append(num)
-        else:
-            equal_arr.append(num)
-    return quick_sort(lesser_arr) + equal_arr + quick_sort(greater_arr)
+def heapqsort(iterable):
+    h = []
+    result = []
+    for value in iterable:
+        heapq.heappush(h, value)
+    for i in range(len(h)):
+        result.append(heapq.heappop(h))
+    return result
 
 
-n = int(input())
+n = int(sys.stdin.readline().rstrip())
 k = []
+cnt = 0
 for i in range(n):
-    k.append(int(input()))
-    k.sort()
-    print(k[int(i / 2)])
+    k.append(int(sys.stdin.readline().rstrip()))
+    k = heapqsort(k)
+    if i % 2 == 0:
+        cnt += 1
+    print(k[cnt - 1])
