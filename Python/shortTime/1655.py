@@ -7,23 +7,21 @@
 import sys
 import heapq
 
+n = int(sys.stdin.readline())
+max_heap = []
+min_heap = []
 
-def heapqsort(iterable):
-    h = []
-    result = []
-    for value in iterable:
-        heapq.heappush(h, value)
-    for i in range(len(h)):
-        result.append(heapq.heappop(h))
-    return result
+for _ in range(n):
+    num = int(sys.stdin.readline())
+    if len(max_heap) == len(min_heap):
+        heapq.heappush(max_heap, (-num, num))
+    else:
+        heapq.heappush(min_heap, (num, num))
 
+    if min_heap and max_heap[0][1] > min_heap[0][1]:
+        max_value = heapq.heappop(max_heap)[1]
+        min_value = heapq.heappop(min_heap)[1]
+        heapq.heappush(max_heap, (-min_value, min_value))
+        heapq.heappush(min_heap, (max_value, max_value))
 
-n = int(sys.stdin.readline().rstrip())
-k = []
-cnt = 0
-for i in range(n):
-    k.append(int(sys.stdin.readline().rstrip()))
-    k = heapqsort(k)
-    if i % 2 == 0:
-        cnt += 1
-    print(k[cnt - 1])
+    print(max_heap[0][1])
