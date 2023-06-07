@@ -1,4 +1,6 @@
-n = [1, 2, 3, 4, 5, 6, 7]
-print(n)
+from collections import deque
 
-print(n.pop(5))
+test = deque()
+test.append((1, 2))
+test.append((2, 3))
+print(len(test))
