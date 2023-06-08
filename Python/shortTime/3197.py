@@ -21,7 +21,7 @@ def bfs(x, y):
                 continue
             if lake[cx][cy] == "." and lake[nx][ny] == "X":
                 melt.append((nx, ny))
-            if not visited[nx][ny]:
+            if not visited[nx][ny] and  lake[nx][ny] == ".":
                 queue.append((nx, ny))
                 visited[nx][ny] = True
     return melt
