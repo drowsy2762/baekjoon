@@ -2,63 +2,7 @@
 from collections import deque
 from sys import stdin
 
-<<<<<<< HEAD
-# L 은 오리 .은 물 X 는 빙판
-
-
-# 빙판을 녹이는 과정
-def bfs(x, y):
-    queue = deque()
-    melt = []
-    queue.append((x, y))
-    visited[x][y] = True
-    dx = [0, 0, -1, 1]
-    dy = [-1, 1, 0, 0]
-    while queue:
-        cx, cy = queue.popleft()
-        for i in range(4):
-            nx = cx + dx[i]
-            ny = cy + dy[i]
-            if 0 > nx or nx >= r or 0 > ny or ny >= c:
-                continue
-            if lake[cx][cy] == "." and lake[nx][ny] == "X":
-                melt.append((nx, ny))
-            if not visited[nx][ny] and  lake[nx][ny] == ".":
-                queue.append((nx, ny))
-                visited[nx][ny] = True
-    return melt
-
-
-def melt(melt):
-    for i in melt:
-        lake[i[0]][i[1]] = "."
-
-
-# 오리가 만나는지 확인
-def swan(x, y):
-    queue = deque()
-    queue.append((x, y))
-    visited[x][y] = True
-    swan = []
-    dx = [0, 0, -1, 1]
-    dy = [-1, 1, 0, 0]
-    while queue:
-        cx, cy = queue.popleft()
-        for i in range(4):
-            nx = cx + dx[i]
-            ny = cy + dy[i]
-            if 0 > nx or nx >= r or 0 > ny or ny >= c:
-                continue
-            if lake[nx][ny] == "L" and not visited[nx][ny]:
-                swan.append((nx, ny))
-            if not visited[nx][ny] and lake[nx][ny] == ".":
-                queue.append((nx, ny))
-            visited[nx][ny] = True
-    return swan
-
-=======
 input = stdin.readline
->>>>>>> b804624 (up)
 
 # 호수의 크기를 입력받음
 r, c = map(int, input().split())
