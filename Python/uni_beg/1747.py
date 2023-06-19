@@ -1,4 +1,5 @@
 # https://www.acmicpc.net/problem/1747 : 소수&팰린드롬 (python3)
+# 2023-06-19 11:49
 from sys import stdin
 
 # input runtime 최적화
