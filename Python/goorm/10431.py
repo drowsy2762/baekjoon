@@ -8,20 +8,19 @@ input = stdin.readline
 p = int(input())
 
 
+# 버블정렬
 def b_sort(arr):
     cnt = 0
-    for i in range(1, 21):
+    for i in range(len(arr) - 1, 0, -1):
         for j in range(i):
-            if arr[i] < arr[j]:
-                cnt += i - 1
-                print(cnt, i - 1, j)
-                arr.insert(j, arr[i])
-                arr.pop(i + 1)
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                cnt += 1
     return cnt
 
 
 for _ in range(p):
-    # 배열을 만들어서 하나씩 받아서 정렬함
     arr = list(map(int, input().split()))
-    print(arr[0], b_sort(arr))
-    print(arr)
+    # 배열을 분리
+    count, people = arr[0], arr[1:]
+    print(count, b_sort(people))

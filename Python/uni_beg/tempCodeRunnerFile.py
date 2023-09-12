@@ -1,5 +1,2 @@
-a = []
 
-a.append((1, 2))
-
-print(a)
+    return 0

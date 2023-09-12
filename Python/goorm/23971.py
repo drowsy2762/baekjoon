@@ -1,4 +1,5 @@
 # https://www.acmicpc.net/problem/23971 : ZOAC 4 (python3)
+# 2023-09-11
 # input 최적화 작업
 from sys import stdin
 from math import ceil
