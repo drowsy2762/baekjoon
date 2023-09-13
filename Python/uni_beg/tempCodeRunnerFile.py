@@ -1,2 +1,2 @@
-
-    return 0
+queue = [(1, 2)]
+print(queue[0])

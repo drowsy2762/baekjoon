@@ -5,33 +5,46 @@ input = stdin.readline
 
 m, n, k = map(int, input().split())
 
-graph = [[0] * n for _ in range(m)]
-dx = [1, -1, 0, 0]
-dy = [0, 0, 1, -1]
+graph = [[0] * m for _ in range(n)]
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
 
 
 def dfs(x, y):
-    queue = []
-
-    for i in range(4):
-        nx = dx[i] + x
-        ny = dy[i] + y
-        if graph[nx][ny] == 0:
-            queue.append([nx, ny])
+    cnt = 1
+    graph[x][y] = 1
+    queue = [(x, y)]
+    while queue:
+        for i in range(4):
+            nx = queue[0][0] + dx[i]
+            ny = queue[0][1] + dy[i]
+            if nx >= n or nx < 0 or ny >= m or ny < 0:
+                continue
+            if graph[nx][ny] == 0:
+                queue.append((nx, ny))
+                graph[nx][ny] = 1
+                cnt += 1
+        queue.pop(0)
+    return cnt
 
 
 for i in range(k):
     lx, ly, rx, ry = map(int, input().split())
     if lx > rx:
-        tem = rx
-        rx = lx
-        lx = tem
+        rx, lx = lx, rx
     if ly > ry:
-        tem = ry
-        ry = ly
-        ly = tem
-    for j in range(ly, ry):
-        for k in range(lx, rx):
+        ry, ly = ly, ry
+    for j in range(lx, rx):
+        for k in range(ly, ry):
             graph[j][k] = 1
 
-print(graph)
+
+count = []
+for i in range(n):
+    for j in range(m):
+        if graph[i][j] == 0:
+            count.append(dfs(i, j))
+
+print(len(count))
+count.sort()
+print(*count)
