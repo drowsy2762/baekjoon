@@ -1,5 +1,5 @@
 # https://www.acmicpc.net/problem/9655 : 돌 게임 (python3)
-# 2023-09-16
+# 2023-09-19
 # input 최적화 작업
 from sys import stdin
 

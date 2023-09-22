@@ -1,5 +1,5 @@
 # https://www.acmicpc.net/problem/10431 : 주사위 세개 (python3)
-# 2023-09-17
+# 2023-09-20
 # input 최적화 작업
 from sys import stdin
 

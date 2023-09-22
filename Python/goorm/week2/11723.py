@@ -1,5 +1,5 @@
 # https://www.acmicpc.net/problem/11723 : 집합 (python3)
-# 2023-09-15
+# 2023-09-18
 # input 최적화 작업
 
 from sys import stdin
