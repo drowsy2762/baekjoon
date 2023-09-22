@@ -1,5 +1,6 @@
 # https://www.acmicpc.net/problem/25757 : 임스와 함께하는 미니게임 (python3)
-# 2023-09-19
+# 2023-09-26
+
 from sys import stdin
 
 input = stdin.readline

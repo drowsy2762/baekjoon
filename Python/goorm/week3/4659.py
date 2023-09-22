@@ -1,5 +1,6 @@
 # https://www.acmicpc.net/problem/4659 : 비밀번호 발음하기 (python3)
-# 2023-09-18
+# 2023-09-25
+
 from sys import stdin
 
 input = stdin.readline

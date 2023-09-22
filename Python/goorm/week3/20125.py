@@ -1,4 +1,5 @@
 # https://www.acmicpc.net/problem/20125 : 쿠키의 신체 측정(python3)
+# 2023-09-27
 from sys import stdin
 
 input = stdin.readline
