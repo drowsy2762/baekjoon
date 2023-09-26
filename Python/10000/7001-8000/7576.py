@@ -28,5 +28,11 @@ m, n = map(int, input().split())
 
 graph = [list(map(int, input().split())) for _ in range(n)]
 dist = []
-bfs(0, 0)
-print(graph)
+result = 0
+for i in range(n):
+    for j in range(m):
+        if graph[i][j] == 1:
+            dist.append(bfs(i, j))
+            result = max(result, dist[-1])
+
+print(graph, result)
