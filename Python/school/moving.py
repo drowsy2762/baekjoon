@@ -12,5 +12,5 @@ while True:
     turtle.penup()
     turtle.goto(x, y)
     turtle.pendown()
-    m = input("쓰고싶은문장")
+    m = input()
     turtle.write(arg=m, font=("Gulim", 20, "normal"))

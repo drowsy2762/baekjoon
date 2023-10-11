@@ -5,21 +5,29 @@ from sys import stdin
 
 input = stdin.readline
 
+
 n = int(input())
 request = list(map(int, input().split()))
 budget = int(input())
+average = int(budget / n)
 
-Max, m = 0, 0
-Sum = sum(request)
+start, end = 0, max(request)
+result = 0
 
-if budget >= Sum:
-    for i in range(n):
-        Max = max(request[i], Max)
-    print(Max)
-else:
-    Average = int(Sum / n)
-    for i in range(n):
-        if request[i] < Average:
-            budget -= request[i]
-            m += 1
-    print(int(budget / m))
+while start <= end:
+    mid = int((start + end) / 2)
+    total = 0
+
+    for i in request:
+        if i > mid:
+            total += mid
+        else:
+            total += i
+
+    if total > budget:
+        end = mid - 1
+    else:
+        start = mid + 1
+        result = mid
+
+print(result)
