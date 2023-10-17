@@ -1,11 +1,8 @@
-import turtle
-import random
-
 turtle.shape("turtle")
-turtle.pensize(5)
 turtle.setup(width=300, height=300)
 turtle.goto(0, 100)
 turtle.pendown()
+turtle.pensize(5)
 cnt = 0
 while True:
     round = random.randint(0, 360)
