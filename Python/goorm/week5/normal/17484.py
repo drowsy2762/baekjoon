@@ -1,29 +1,25 @@
 # https://www.acmicpc.net/problem/17484 : 진우의 달 여행 (small) (python3)
 # 2023-10-13
-from sys import stdin
+import sys
 
-input = stdin.readline
+n, m = map(int, sys.stdin.readline().split(" "))
+matrix = [list(map(int, sys.stdin.readline().split(" "))) for _ in range(n)]
 
-N, M = map(int, input().split())
-matrix = [list(map(int, input().split())) for _ in range(N)]
-dp = [[[0, 0, 0] for _ in range(M)]] + [
-    [[float("inf"), float("inf"), float("inf")] for _ in range(M)] for _ in range(N)
-]
+direction = [-1, 0, 1]
 
-for i in range(1, N + 1):
-    for j in range(M):
-        if j < M - 1:
-            dp[i][j][0] = (
-                min(dp[i - 1][j + 1][1], dp[i - 1][j + 1][2]) + matrix[i - 1][j]
-            )
-        if 0 < j:
-            dp[i][j][2] = (
-                min(dp[i - 1][j - 1][1], dp[i - 1][j - 1][0]) + matrix[i - 1][j]
-            )
-        dp[i][j][1] = min(dp[i - 1][j][0], dp[i - 1][j][2]) + matrix[i - 1][j]
 
-min_value = float("inf")
-for row in dp[i]:
-    for each in row:
-        min_value = min(min_value, each)
-print(min_value)
+def dfs(col, row, d, low, answer):
+    if col == n - 1:
+        return min(low, answer)
+    for i in direction:
+        if i != d:
+            if 0 <= col < n and 0 <= row + i < m:
+                low = dfs(col + 1, row + i, i, low, answer + matrix[col + 1][row + i])
+    return low
+
+
+low = int(sys.maxsize)
+for i in range(m):
+    low = min(dfs(0, i, 2, low, matrix[0][i]), low)
+
+print(low)
