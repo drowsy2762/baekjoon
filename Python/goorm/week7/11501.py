@@ -15,26 +15,23 @@ def getMax(start, end):
     return day
 
 
-def buy():
-    return
-
-
 T = int(input())
-
 for _ in range(T):
     N = int(input())
     days = list(map(int, input().split()))
-    tmp, j = 0, 0
+    sequence, j = 0, 0
     start, money, jusik = 0, 0, 0
-    while tmp != N - 1:
-        rtmp = tmp
-        tmp = getMax(tmp, N)
-        if rtmp == tmp:
-            tmp += 1
+    while sequence != N - 1:
+        rtmp = sequence
+        sequence = getMax(sequence, N)
+        if rtmp == sequence:
+            sequence += 1
             continue
-        for i in range(start, tmp - 1):
+        for i in range(start, sequence):
             jusik += days[i]
             j += 1
-        money += jusik * days[tmp] - jusik
-        jusik = 0
+        start = sequence
+        print(sequence, days[sequence], jusik, start, j)
+        money += abs((days[sequence] - jusik)) * j
+        jusik, j = 0, 0
     print(money, "t")
