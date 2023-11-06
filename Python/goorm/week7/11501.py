@@ -5,17 +5,18 @@ from sys import stdin
 input = stdin.readline
 
 
-def grid(day, choice, stock, sum):
-    if day == N - 1:
-        return sum
-    if choice == 1:
-        stock += 1
-    elif choice == 2:
-        sum += stock * days[day - 1]
-    a = grid(day + 1, 1, stock, sum)
-    b = grid(day + 1, 2, stock, sum)
-    c = grid(day + 1, 3, stock, sum)
-    return max(a, b, c)
+def getMax(start, end):
+    max = 0
+    day = 0
+    for i in range(start, end):
+        if days[i] > max:
+            max = days[i]
+            day = i
+    return day
+
+
+def buy():
+    return
 
 
 T = int(input())
@@ -23,4 +24,17 @@ T = int(input())
 for _ in range(T):
     N = int(input())
     days = list(map(int, input().split()))
-    print(grid(0, 1, 0, 0), "t")
+    tmp, j = 0, 0
+    start, money, jusik = 0, 0, 0
+    while tmp != N - 1:
+        rtmp = tmp
+        tmp = getMax(tmp, N)
+        if rtmp == tmp:
+            tmp += 1
+            continue
+        for i in range(start, tmp - 1):
+            jusik += days[i]
+            j += 1
+        money += jusik * days[tmp] - jusik
+        jusik = 0
+    print(money, "t")
