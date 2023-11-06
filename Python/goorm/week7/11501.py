@@ -12,26 +12,36 @@ def getMax(start, end):
         if days[i] > max:
             max = days[i]
             day = i
-    return day
+    if day == 0:
+        return start
+    else:
+        return day
 
 
 T = int(input())
 for _ in range(T):
     N = int(input())
     days = list(map(int, input().split()))
-    sequence, j = 0, 0
-    start, money, jusik = 0, 0, 0
+    sequence, cnt = 0, 0
+    start, money = 0, 0
+
     while sequence != N - 1:
+        stock = []
         rtmp = sequence
         sequence = getMax(sequence, N)
         if rtmp == sequence:
             sequence += 1
+            start += 1
             continue
-        for i in range(start, sequence):
-            jusik += days[i]
-            j += 1
+        # print(start, sequence, "t")
+        if start + 1 == sequence:
+            stock.append(days[start])
+        else:
+            for i in range(start, sequence):
+                stock.append(days[i])
         start = sequence
-        print(sequence, days[sequence], jusik, start, j)
-        money += abs((days[sequence] - jusik)) * j
-        jusik, j = 0, 0
-    print(money, "t")
+        # print(days[sequence], stock)
+        for i in range(len(stock)):
+            money += days[sequence] - stock[i]
+        stock = 0
+    print(money)
