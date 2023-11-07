@@ -6,8 +6,7 @@ input = stdin.readline
 
 
 def getMax(start, end):
-    max = 0
-    day = 0
+    max, day = 0, 0
     for i in range(start, end):
         if days[i] > max:
             max = days[i]
@@ -18,30 +17,27 @@ def getMax(start, end):
         return day
 
 
+def sell(start, end):
+    money = 0
+    for i in range(start, end):
+        money += days[end] - days[i]
+    return money
+
+
 T = int(input())
 for _ in range(T):
     N = int(input())
     days = list(map(int, input().split()))
-    sequence, cnt = 0, 0
+    sequence = 0
     start, money = 0, 0
 
     while sequence != N - 1:
-        stock = []
         rtmp = sequence
         sequence = getMax(sequence, N)
         if rtmp == sequence:
             sequence += 1
-            start += 1
+            start = sequence
             continue
-        # print(start, sequence, "t")
-        if start + 1 == sequence:
-            stock.append(days[start])
-        else:
-            for i in range(start, sequence):
-                stock.append(days[i])
+        money += sell(start, sequence)
         start = sequence
-        # print(days[sequence], stock)
-        for i in range(len(stock)):
-            money += days[sequence] - stock[i]
-        stock = 0
     print(money)
