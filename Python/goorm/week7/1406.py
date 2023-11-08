@@ -2,6 +2,8 @@
 # 2023-11-09
 from sys import stdin
 
+input = stdin.readline
+
 string = list(input())
 cursor = len(string)
 
