@@ -2,32 +2,25 @@
 # 2023-11-09
 from sys import stdin
 
-# from collections import deque
+string = list(input())
+cursor = len(string)
 
-input = stdin.readline
-
-string = input().rstrip()
-string = list(string)
-n = int(input())
-cursor = len(string) - 1
-for i in range(n):
-    command = input().rstrip()
-    command = command.split()
+for _ in range(int(input())):
+    command = list(input().split())
     if command[0] == "P":
-        char = command[1]
-        command = command[0]
-    else:
-        command = command[0]
-    if command == "B" and cursor != -1:
-        del string[cursor]
-        cursor -= 1
-    elif command == "P":
-        string.insert(cursor + 1, char)
-        cursor += 1
-    elif command == "L" and cursor != -1:
-        cursor -= 1
-    elif command == "D" and cursor != len(string) - 1:
+        string.insert(cursor, command[1])
         cursor += 1
 
-for i in range(len(string)):
-    print(string[i], end="")
+    elif command[0] == "L":
+        if cursor > 0:
+            cursor -= 1
+
+    elif command[0] == "D":
+        if cursor < len(string):
+            cursor += 1
+
+    else:
+        if cursor > 0:
+            string.remove(string[cursor - 1])
+
+print("".join(string))
