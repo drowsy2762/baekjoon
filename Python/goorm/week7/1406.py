@@ -4,25 +4,22 @@ from sys import stdin
 
 input = stdin.readline
 
-string = list(input())
-cursor = len(string)
+st1 = list(input().rstrip())
+st2 = []
 
 for _ in range(int(input())):
     command = list(input().split())
-    if command[0] == "P":
-        string.insert(cursor, command[1])
-        cursor += 1
-
-    elif command[0] == "L":
-        if cursor > 0:
-            cursor -= 1
-
+    if command[0] == "L":
+        if st1:
+            st2.append(st1.pop())
     elif command[0] == "D":
-        if cursor < len(string):
-            cursor += 1
-
+        if st2:
+            st1.append(st2.pop())
+    elif command[0] == "B":
+        if st1:
+            st1.pop()
     else:
-        if cursor > 0:
-            string.remove(string[cursor - 1])
+        st1.append(command[1])
 
-print("".join(string))
+st1.extend(reversed(st2))
+print("".join(st1))
