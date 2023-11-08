@@ -1,13 +1,7 @@
-
-# def getMax(start, end):
-#     max = 0
-#     day = 0
-#     for i in range(start, end):
-#         if days[i] > max:
-#             max = days[i]
-#             day = i
-#     return day
-
-
-# def buy():
-#     return
+e:
+    #     command = command[0]
+    # cursor = moveCursor(cursor, command)
+    # if command == "B":
+    #     string = string[:cursor] + string[cursor + 1 :]
+    # elif command == "P":
+    #     string = string[:cursor] + command[2] + string[cursor:]
