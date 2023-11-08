@@ -9,7 +9,7 @@ input = stdin.readline
 string = input().rstrip()
 string = list(string)
 n = int(input())
-cursor = len(string)
+cursor = len(string) - 1
 for i in range(n):
     command = input().rstrip()
     command = command.split()
@@ -18,17 +18,16 @@ for i in range(n):
         command = command[0]
     else:
         command = command[0]
-    if command == "B" and cursor != 0:
+    if command == "B" and cursor != -1:
         del string[cursor]
         cursor -= 1
-    elif command == "B" and cursor == 0:
-        del string[0]
     elif command == "P":
-        string.insert(cursor, char)
+        string.insert(cursor + 1, char)
         cursor += 1
-    elif command == "L" and cursor != 0:
+    elif command == "L" and cursor != -1:
         cursor -= 1
-    elif command == "D" and cursor != len(string):
+    elif command == "D" and cursor != len(string) - 1:
         cursor += 1
-    print(string, cursor)
-print(string)
+
+for i in range(len(string)):
+    print(string[i], end="")
