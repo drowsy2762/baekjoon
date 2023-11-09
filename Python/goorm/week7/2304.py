@@ -21,9 +21,9 @@ for i, k in storage:
 area += ymax
 storage.reverse()
 smax = storage[0][1]
-x += 1
 t = storage[0][1]
 for i, k in storage:
+    # print(area, smax, ymax, k)
     if smax == ymax:
         break
     area -= (x - i) * (ymax - smax)
@@ -31,5 +31,6 @@ for i, k in storage:
         t = smax
         smax = k
     x = i
-area += ymax - t
+    # print(k, smax)
+
 print(area)
