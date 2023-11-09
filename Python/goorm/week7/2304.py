@@ -8,30 +8,28 @@ n = int(input())
 
 storage = list()
 area = 0
-l, m = map(int, input().split())
-x = l
-ymax = m
-for _ in range(n - 1):
+for _ in range(n):
     l, m = map(int, input().split())
     storage.append((l, m))
 storage.sort()
+x, ymax = storage[0][0], storage[0][1]
 for i, k in storage:
-    print((i - x) * ymax, "t")
     area += (i - x) * ymax
     if ymax < k:
         ymax = k
     x = i
 area += ymax
 storage.reverse()
-smax = k
+smax = storage[0][1]
 x += 1
+t = storage[0][1]
 for i, k in storage:
-    area -= (x - i) * (ymax - smax)
-    print((x - i) * (ymax - smax))
-    x = i
-    if k > smax:
-        smax = k
     if smax == ymax:
         break
+    area -= (x - i) * (ymax - smax)
+    if k > smax:
+        t = smax
+        smax = k
+    x = i
+area += ymax - t
 print(area)
-# print(storage)
