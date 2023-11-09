@@ -16,6 +16,7 @@ for _ in range(n - 1):
     storage.append((l, m))
 storage.sort()
 for i, k in storage:
+    print((i - x) * ymax, "t")
     area += (i - x) * ymax
     if ymax < k:
         ymax = k
@@ -23,12 +24,14 @@ for i, k in storage:
 area += ymax
 storage.reverse()
 smax = k
+x += 1
 for i, k in storage:
-    if smax == ymax:
-        break
     area -= (x - i) * (ymax - smax)
+    print((x - i) * (ymax - smax))
     x = i
     if k > smax:
         smax = k
+    if smax == ymax:
+        break
 print(area)
 # print(storage)
