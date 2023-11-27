@@ -4,41 +4,27 @@ from sys import stdin
 
 input = stdin.readline
 
-N, d, k, c = map(int, input().split())
-belts = []
-cases = []
-M = 0
+N, d, k, c = map(int, input().rsplit())
+belts = [int(input().rstrip()) for _ in range(N)]
+belts.extend(belts)
+left, right = 0, 0
 
-# 회전 벨트에 올라와있는 초밥번호를 받음
-for _ in range(N):
-    belts.append(int(input()))
+answer = 0
 
-# 슬라이스를 연장
-for i in range(k):
-    belts.append(belts[i])
+while left != N:
+    right = left + k
+    case = set()
+    addable = True
+    for i in range(left, right):
+        i %= N
+        case.add(belts[i])
+        if belts[i] == c:
+            addable = False
 
-# 중복값을 걸러냄
-for i in range(N):
-    tmp = belts[i : i + k]
-    list1 = list(dict.fromkeys(tmp))
-    if len(list1) == k:
-        cases.append(belts[i : i + k])
+    cnt = len(case)
+    if addable:
+        cnt += 1
+    answer = max(answer, cnt)
+    left += 1
 
-print(cases)
-# print(cases)
-
-# cnt = 0
-# for i in cases:
-#     cnt = 0
-#     for j in i:
-#         if j == c:
-#             cnt = 1
-#             break
-#     if cnt == 0:
-#         cnt = 1
-#     else:
-#         cnt = 0
-#     M = max(M, k + cnt)
-
-
-print(M)
+print(answer)
