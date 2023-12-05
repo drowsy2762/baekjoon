@@ -4,12 +4,14 @@ from sys import stdin
 
 input = stdin.readline
 
-N, d, k, c = map(int, input().rsplit())
-belts = [int(input().rstrip()) for _ in range(N)]
-belts.extend(belts)
-left, right = 0, 0
-
-answer = 0
-
-while left != N:
-    right = left + k
+N, d, k, c = map(int, input().rstrip().split())
+belts = [int(input()) for _ in range(N)]
+max = 0
+for i in range(N):
+    if i + k > N:
+        num = len(set(belts[i:N] + belts[: (i + k) % N] + [c]))
+    else:
+        num = len(set(belts[i : i + k] + [c]))
+    if max < num:
+        max = num
+print(max)
