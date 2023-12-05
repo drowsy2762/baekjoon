@@ -13,18 +13,3 @@ answer = 0
 
 while left != N:
     right = left + k
-    case = set()
-    addable = True
-    for i in range(left, right):
-        i %= N
-        case.add(belts[i])
-        if belts[i] == c:
-            addable = False
-
-    cnt = len(case)
-    if addable:
-        cnt += 1
-    answer = max(answer, cnt)
-    left += 1
-
-print(answer)
