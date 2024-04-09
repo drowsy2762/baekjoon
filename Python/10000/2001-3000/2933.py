@@ -36,6 +36,7 @@ def throwStick(y):
 def checkCluster():
     x, y = 0, 0
     mq = deque()
+    cq = deque()
     while cq:
         for i in range(4):
             nx, ny = x + dx[i], y + dy[i]
