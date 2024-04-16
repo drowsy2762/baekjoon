@@ -7,10 +7,10 @@ MOD = 1000000007
 cashes = []
 
 
-def factorial(n):
-    N = 1
-    for i in range(2, n + 1):
-        N = (N * i) % MOD
+def factorial(N):
+    n = 1
+    for i in range(2, N + 1):
+        n = (n * i) % MOD
     return n
 
 
