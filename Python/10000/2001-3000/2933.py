@@ -2,60 +2,104 @@
 from collections import deque
 from sys import stdin
 
-# 미네랄 캐진거 확인하고 클러스터 떨어지는거 확인
-# 떨어지는거 확인하고 떨어지는거 떨어지게 하기
-
-# input runtime 최적화
+# 입력 최적화
 input = stdin.readline
 
-# 미리 필요한 부분을 전역함수로 선언
+# 방향 벡터
 dx = [1, -1, 0, 0]
 dy = [0, 0, 1, -1]
-r, c = map(int, input().split())
-cave = [list(input().rstrip()) for _ in range(r)]
+turn = True
 
 
-# 미네랄을 파괴하는 함수
-def destroy(y, direction):
-    if direction == True:
+def destroy(y):
+    global turn
+    if turn == True:
         for i in range(c):
-            if cave[y - 1][i] == "x":
-                cave[y - 1][i] = "."
-                direction = False
-                cluster = cluster(y - 1, i)
+            if cave[r - y][i] == "x":
+                cave[r - y][i] = "."
+                turn = False
+                return (y, i)
     else:
-        for i in range(0, c, -1):
-            if cave[y - 1][i] == "x":
-                cave[y - 1][i] = "."
-                direction = True
-                cluster = cluster(y - 1, i)
+        for i in range(c - 1, -1, -1):
+            if cave[r - y][i] == "x":
+                cave[r - y][i] = "."
+                turn = True
+                return (y, i)
 
 
-# 떨어진 클러스터의 구성을 확인하는 함수
-def cluster(x, y):
-    visited = [[0] * c for _ in range(r)]
-    visited[x][y] = 1
-    q = [(x, y)]
+def findCluster(x, y):
+    visited = [[False] * c for _ in range(r)]
+    visited[x][y] = True
+    q = deque([(x, y)])
+    cluster = [(x, y)]
     while q:
-        x, y = q.popleft()
+        x, y = q[0]
+        if len(q) > 0:  # 큐가 비어있는지 확인
+            x, y = q.popleft()
+        else:
+            break
         for i in range(4):
             nx = x + dx[i]
             ny = y + dy[i]
-            if nx < 0 or nx >= r or ny < 0 or ny >= c:
-                continue
-            if visited[nx][ny] == 0 and cave[nx][ny] == "x":
-                visited[nx][ny] = 1
+            if (
+                0 <= nx < r
+                and 0 <= ny < c
+                and not visited[nx][ny]
+                and cave[nx][ny] == "x"
+            ):
+                visited[nx][ny] = True
                 q.append((nx, ny))
-    return visited
+    return cluster
 
 
+def isFloating(cluster):
+    for x, y in cluster:
+        if x == r - 1 or cave[x + 1][y] == "x":
+            return False
+    return True
+
+
+def applyGravity(cluster):
+    minFallDistance = r
+    for x, y in cluster:
+        fallDistance = 0
+        while x + fallDistance + 1 < r and cave[x + fallDistance + 1][y] == ".":
+            fallDistance += 1
+        minFallDistance = min(minFallDistance, fallDistance)
+
+    for x, y in cluster:
+        cave[x][y] = "."
+        cave[x + minFallDistance][y] = "x"
+
+
+def processTurn(height):
+    hit = destroy(height)
+    if hit:
+        floatingClusters = []
+        visited = [[False] * c for _ in range(r)]
+        for i in range(r):
+            for j in range(c):
+                if cave[i][j] == "x" and not visited[i][j]:
+                    cluster = findCluster(i, j)
+                    if isFloating(cluster):
+                        floatingClusters.append(cluster)
+        for cluster in floatingClusters:
+            applyGravity(cluster)
+
+
+# 메인 함수
 def solution():
+    global cave, r, c
+    r, c = map(int, input().split())
+    cave = [list(input().strip()) for _ in range(r)]
     n = int(input())
-    height = list(map(int, input().split()))
-    direction = False
+    heights = list(map(int, input().split()))
 
-    for i in range(r):
-        print("".join(cave[i]))
+    for height in heights:
+        processTurn(height)
+
+    for row in cave:
+        print("".join(row))
 
 
 solution()
