@@ -18,13 +18,14 @@ def destroy(y):
             if cave[r - y][i] == "x":
                 cave[r - y][i] = "."
                 turn = False
-                return (y, i)
+                return (r - y, i)
     else:
         for i in range(c - 1, -1, -1):
             if cave[r - y][i] == "x":
                 cave[r - y][i] = "."
                 turn = True
-                return (y, i)
+                return (r - y, i)
+    return None
 
 
 def findCluster(x, y):
@@ -33,8 +34,7 @@ def findCluster(x, y):
     q = deque([(x, y)])
     cluster = [(x, y)]
     while q:
-        x, y = q[0]
-        if len(q) > 0:  # 큐가 비어있는지 확인
+        if len(q) > 0:
             x, y = q.popleft()
         else:
             break
@@ -54,7 +54,9 @@ def findCluster(x, y):
 
 def isFloating(cluster):
     for x, y in cluster:
-        if x == r - 1 or cave[x + 1][y] == "x":
+        if x == r - 1 or (
+            x + 1 < r and cave[x + 1][y] == "x" and (x + 1, y) not in cluster
+        ):
             return False
     return True
 
@@ -63,12 +65,17 @@ def applyGravity(cluster):
     minFallDistance = r
     for x, y in cluster:
         fallDistance = 0
-        while x + fallDistance + 1 < r and cave[x + fallDistance + 1][y] == ".":
+        while (
+            x + fallDistance + 1 < r
+            and (x + fallDistance + 1, y) not in cluster
+            and cave[x + fallDistance + 1][y] == "."
+        ):
             fallDistance += 1
         minFallDistance = min(minFallDistance, fallDistance)
 
     for x, y in cluster:
         cave[x][y] = "."
+    for x, y in cluster:
         cave[x + minFallDistance][y] = "x"
 
 
@@ -97,9 +104,9 @@ def solution():
 
     for height in heights:
         processTurn(height)
-
-    for row in cave:
-        print("".join(row))
+        for row in cave:
+            print("".join(row))
+        print()
 
 
 solution()
