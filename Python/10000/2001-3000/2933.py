@@ -14,15 +14,17 @@ turn = True
 def destroy(y):
     global turn, cave
     if turn == True:
+        turn = False
         for i in range(c):
             if cave[r - y][i] == "x":
                 cave[r - y][i] = "."
-                turn = False
+                break
     else:
+        turn = True
         for i in range(c - 1, -1, -1):
             if cave[r - y][i] == "x":
                 cave[r - y][i] = "."
-                turn = True
+                break
 
 
 def find_cluster():
@@ -81,9 +83,6 @@ def solution():
         cluster, flag, visited = find_cluster()
         if flag == 0:
             drop_cluster(cluster, visited)
-        for i in range(r):
-            print("".join(cave[i]))
-        print()
 
     for i in range(r):
         print("".join(cave[i]))
