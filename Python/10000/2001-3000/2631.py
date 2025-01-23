@@ -3,28 +3,17 @@ from sys import stdin
 
 input = stdin.readline
 
-# 다이나믹 프로그래밍을 통해 문제를 풀고싶음
-dp = []
-cnt = 0
-perfect = [i + 1 for i in range(n)]
 
+n = int(input())
+line = []
+for i in range(n):
+    line.append(int(input()))
 
-def dp(m):
-    weight = []
-    for i in range(len(m)):
-        weight.append(int(abs(i + 1 - m[i])))
-    move = weight.index(max(weight))
+dp = [1] * (n + 1)
 
-    print(weight)
+for i in range(n):
+    for j in range(i):
+        if line[j] < line[i]:
+            dp[i] = max(dp[i], dp[j] + 1)
 
-
-def main():
-    n = int(input())
-    m = []
-    j = 0
-    for i in range(n):
-        m.append(int(input()))
-    dp(m)
-
-
-main()
+print(n - max(dp))
