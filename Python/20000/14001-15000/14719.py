@@ -11,5 +11,5 @@ for i in range(1, w - 1):
     left = max(blocks[:i])
     right = max(blocks[i + 1 :])
     if blocks[i] < left and blocks[i] < right:
-        answer += min(left, right) - blocks[i]
+        answer += min(left, right) - blocks[i] 
 print(answer)

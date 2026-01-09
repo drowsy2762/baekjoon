@@ -9,4 +9,4 @@ words = []
 for i in range(n) :
     words.append(input().strip())
 
-print(words)
+print(words) 

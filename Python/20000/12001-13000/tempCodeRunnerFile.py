@@ -1,0 +1,2 @@
+
+                        board[cursor][j] = tmp

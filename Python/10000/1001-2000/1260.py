@@ -21,7 +21,7 @@ def dfs(V):
             dfs(i)
 
 
-def bfs(V):
+def     bfs(V):
     q = deque([V])
     visited2[V] = True
     while q:
