@@ -10,7 +10,7 @@ dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 
 
-def dfs(x, y):
+def bfs(x, y):
     cnt = 1
     graph[x][y] = 1
     queue = [(x, y)]
@@ -43,7 +43,7 @@ count = []
 for i in range(n):
     for j in range(m):
         if graph[i][j] == 0:
-            count.append(dfs(i, j))
+            count.append(bfs(i, j))
 
 print(len(count))
 count.sort()
