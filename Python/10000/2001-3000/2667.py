@@ -8,7 +8,7 @@ n = int(input())
 graph = [list(map(int, input())) for _ in range(n)]
 
 
-def dfs(x, y):
+def bfs(x, y):
     queue = [(x, y)]
     graph[x][y] = 0
     count = 1
@@ -31,7 +31,7 @@ a = []
 for i in range(n):
     for j in range(n):
         if graph[i][j] == 1:
-            a.append(dfs(i, j))
+            a.append(bfs(i, j))
 a.sort()
 print(len(a))
 for i in range(len(a)):
