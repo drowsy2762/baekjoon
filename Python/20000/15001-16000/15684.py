@@ -1,5 +1,5 @@
 # https://www.acmicpc.net/problem/15684
-# 2026-01-14
+# 2026-01-17
 from sys import stdin
 from copy import deepcopy
 input = stdin.readline
