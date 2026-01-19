@@ -21,6 +21,6 @@ def bfs():
 
 n, k = map(int, input().split())
 max = 10**5
-dist = [0] * (max + 1)
+dist = [0] * (max + 1) # 가중치
 
 bfs()
