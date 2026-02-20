@@ -1,5 +1,5 @@
 # https://www.acmicpc.net/problem/20061
-# 2026-02-12
+# 2026-02-12 
 from sys import stdin
 input = stdin.readline
 
