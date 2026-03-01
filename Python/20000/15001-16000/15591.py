@@ -1,31 +1,51 @@
 # https://www.acmicpc.net/problem/15591
 # 2026-02-28
 import sys
-from collections import deque
 input = sys.stdin.readline
+sys.setrecursionlimit(10**5)
 
-n, Q = map(int, input().split())
-relationships = [[] for _ in range(n+1)]
+def find(x):
+    if parent[x] != x:
+        parent[x] = find(parent[x])
+    return parent[x]
 
-for _ in range(n - 1):
-    u, v, r = map(int, input().split())
-    relationships[u].append((v, r))
-    relationships[v].append((u, r))
-
-for _ in range(Q):
-    k, start_v = map(int, input().split())
-    visited = [False] * (n + 1)
-    visited[start_v] = True
-    result = 0
+def union(a, b):
+    rootA = find(a)
+    rootB = find(b)
     
-    dq = deque([start_v])
+    if rootA != rootB:
+        parent[rootB] = rootA          
+        size[rootA] += size[rootB]     
 
-    while dq:
-        curr_v = dq.pop()
-        for next_v, next_usado in relationships[curr_v]:
-            if next_usado >= k and not visited[next_v]:
-                result += 1
-                dq.append(next_v)
-                visited[next_v] = True
-                
-    print(result)
+N, Q = map(int, input().split())
+
+edges = []
+for _ in range(N - 1):
+    p, q, r = map(int, input().split())
+    edges.append((r, p, q)) 
+
+queries = []
+for i in range(Q):
+    k, v = map(int, input().split())
+    queries.append((k, v, i))
+
+edges.sort(reverse=True)
+queries.sort(reverse=True)
+
+parent = [i for i in range(N + 1)]
+size = [1] * (N + 1)
+ans = [0] * Q  
+
+edge_idx = 0
+
+for k, v, original_idx in queries:
+    while edge_idx < N - 1 and edges[edge_idx][0] >= k:
+        weight, p, q = edges[edge_idx]
+        union(p, q)
+        edge_idx += 1
+        
+    root_v = find(v)
+    ans[original_idx] = size[root_v] - 1
+
+for a in ans:
+    print(a)
