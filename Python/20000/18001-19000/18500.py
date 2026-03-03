@@ -30,7 +30,7 @@ def floating_cluster(start_r, start_c):
     while q:
         cur_r, cur_c = q.popleft()
         if cur_r == R - 1:
-            floating = False
+            return None
 
         for i in range(4):
             nr, nc = cur_r + dr[i], cur_c + dc[i]
@@ -38,7 +38,7 @@ def floating_cluster(start_r, start_c):
                 visited.add((nr, nc))
                 q.append((nr, nc))
                 cluster.append((nr, nc))
-    return cluster if floating else None
+    return cluster
 
 def gravity_cluster(cluster, r, c):
     for r_idx, c_idx in cluster:
