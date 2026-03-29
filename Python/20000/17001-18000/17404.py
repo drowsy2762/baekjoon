@@ -2,20 +2,27 @@
 # 2026-03-29
 import sys
 input = sys.stdin.readline
+INF = 10**9 
 
 n = int(input())
-rgb = [list(map(int,input().split())) for _ in range(n)]
+rgb = [list(map(int, input().split())) for _ in range(n)]
 
-ans = 1000001
+ans = INF
 
 for i in range(3):
-    dp = [[1001] * 3 for _ in range(n)]
-    dp[0][i] = rgb[0][i]
-    for j in range(1,n):
-        dp[j][0] = min(dp[j - 1][1], dp[j - 1][2]) + rgb[j][0] 
-        dp[j][1] = min(dp[j - 1][0], dp[j - 1][2]) + rgb[j][1]
-        dp[j][2] = min(dp[j - 1][0], dp[j - 1][1]) + rgb[j][2] 
-    dp[-1][i] = 1000001 
-    ans = min(ans,min(dp[-1]))
+    dp = [INF, INF, INF]
+    dp[i] = rgb[0][i]
+    
+    for j in range(1, n):
+        next_dp = [
+            min(dp[1], dp[2]) + rgb[j][0],
+            min(dp[0], dp[2]) + rgb[j][1],
+            min(dp[0], dp[1]) + rgb[j][2]
+        ]
+        dp = next_dp 
+        
+    for c in range(3):
+        if i != c:
+            ans = min(ans, dp[c])
 
 print(ans)
