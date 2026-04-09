@@ -20,8 +20,6 @@ def solution():
 
     while pq:
         dist, now = heapq.heappop(pq)
-        if now == end:
-            break
         if distances[now] < dist:
             continue
         for next_node, weight in graph[now]:
@@ -39,8 +37,8 @@ def solution():
         path.append(curr)
         curr = parent[curr]
     
-    path.reverse()
-    print(*(path))
+    print(len(path))
+    print(*(path[::-1]))
 
 if __name__ == "__main__":
     solution()
