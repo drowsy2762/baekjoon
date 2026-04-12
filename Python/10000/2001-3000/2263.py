@@ -1,6 +1,7 @@
 # https://www.acmicpc.net/problem/2263
 # 2026-04-12
 import sys
+sys.setrecursionlimit(10**6)
 
 def solution():
     input = sys.stdin.readline
